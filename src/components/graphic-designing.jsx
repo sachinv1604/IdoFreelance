@@ -48,28 +48,26 @@ export default function GraphicDesigning() {
       id="graphic-designing"
       className="py-24 bg-slate-950 border-t border-slate-800"
     >
-      <div className="container mx-auto px-6">
-        <div className="text-center mb-16">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-4xl md:text-5xl font-bold mb-4"
-          >
-            Graphic <span className="text-indigo-500">Designing</span> Gallery
-          </motion.h2>
-          <p className="text-slate-400 max-w-2xl mx-auto">
-            Scroll to slide through all 20 posters. The gallery stays here until you reach the end.
-          </p>
-        </div>
-      </div>
-
       {/* Sticky horizontal gallery driven by vertical scroll (prevents moving to next section early) */}
       <div ref={scrollAreaRef} className="relative" style={{ minHeight: `${scrollHeightVh}vh` }}>
-        <div className="sticky top-24">
+        <div className="sticky top-12 pt-12">
           <div className="container mx-auto px-6 pb-20">
+            <div className="text-center mb-12">
+              <motion.h2
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="text-4xl md:text-5xl font-bold mb-4"
+              >
+                Graphic <span className="text-indigo-500">Designing</span> Gallery
+              </motion.h2>
+              <p className="text-slate-400 max-w-2xl mx-auto">
+                Here are a few graphic designs I’ve done for past clients. Take a look!
+              </p>
+            </div>
+
             <div className="relative">
-              <div className="absolute -top-3 left-1/2 -translate-x-1/2 z-10 flex items-center gap-2 px-4 py-2 rounded-full bg-slate-900/70 border border-slate-800 shadow-lg">
+              <div className="absolute -top-3 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2 px-4 py-2 rounded-full bg-slate-900/70 border border-slate-800 shadow-lg">
                 <Sparkles className="text-indigo-400" size={16} />
                 <span className="text-xs font-bold text-slate-200">keep scrolling...</span>
               </div>
