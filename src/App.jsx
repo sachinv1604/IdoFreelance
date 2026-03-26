@@ -11,6 +11,8 @@ import Contact from "./components/contact";
 import Footer from "./components/footer";
 import PrivacyPolicy from "./components/privacy-policy";
 import Terms from "./components/terms";
+import WebDevelopment from "./components/web-development";
+
 
 function App() {
   const [view, setView] = useState('home');
@@ -28,6 +30,8 @@ function App() {
             <Hero />
             <Services />
             <GraphicDesigning />
+            <WebDevelopment />
+
 
             <Pricing />
 

@@ -4,94 +4,64 @@ import { Code, Globe, LayoutGrid, Rocket } from 'lucide-react';
 
 const websites = [
   {
-    title: 'Local Landing Page',
-    category: 'Web Development',
+    title: 'LIC OBCEWA WEBSITE',
+    category: 'Insurance Service',
     description:
-      'A fast, responsive landing page designed to convert visitors into leads with clean UI and SEO-ready structure.',
-    image: 'https://picsum.photos/seed/web-1/1200/800',
-    url: 'https://example.com',
-    tags: ['Responsive UI', 'SEO-ready', 'Performance-first'],
-    icon: <LayoutGrid size={28} />,
-  },
-  {
-    title: 'Business Website Build',
-    category: 'Web Development',
-    description:
-      'A modern website layout with smooth scrolling, readable typography, and a structure built for real customer journeys.',
-    image: 'https://picsum.photos/seed/web-2/1200/800',
-    url: 'https://example.com',
-    tags: ['UX-focused', 'Clean Sections', 'Mobile-first'],
+      'A professional insurance service website providing policy information and easy customer interaction.',
+    image: 'https://picsum.photos/seed/lic/1200/800',
+    url: 'https://licobcewa.in/',
+    tags: ['Professional', 'Insurance', 'Policy Info'],
     icon: <Globe size={28} />,
   },
   {
-    title: 'Conversion-Focused Website',
-    category: 'Web Development',
+    title: 'BASU CAB SERVICE',
+    category: 'Cab Service',
     description:
-      'Conversion-first pages with clear CTAs, persuasive sections, and a layout that feels premium and trustworthy.',
-    image: 'https://picsum.photos/seed/web-3/1200/800',
-    url: 'https://example.com',
-    tags: ['CTAs', 'Brand Feel', 'On-page polish'],
+      'A local cab service website designed to improve bookings and provide clear service information.',
+    image: 'https://picsum.photos/seed/cab/1200/800',
+    url: 'https://basucabservice.com/',
+    tags: ['Booking System', 'Local Service', 'Responsive'],
     icon: <Rocket size={28} />,
   },
   {
-    title: 'Interactive UI / Design System',
-    category: 'Web Development',
+    title: 'RC TAX CONSULTANT',
+    category: 'Tax Consulting',
     description:
-      'Reusable components and consistent UI patterns for scalable pages that still look great everywhere.',
-    image: 'https://picsum.photos/seed/web-4/1200/800',
-    url: 'https://example.com',
-    tags: ['Reusable UI', 'Consistency', 'Scalable layout'],
-    icon: <Code size={28} />,
-  },
-  {
-    title: 'Restaurant Website Revamp',
-    category: 'Web Development',
-    description:
-      'A modern menu layout with fast load times and a booking-ready structure for better conversions.',
-    image: 'https://picsum.photos/seed/web-5/1200/800',
-    url: 'https://example.com',
-    tags: ['Fast UI', 'Menu flow', 'Mobile-first'],
+      'A clean and professional website for tax consulting services, focused on trust and client communication.',
+    image: 'https://picsum.photos/seed/tax/1200/800',
+    url: 'https://weareat.online/rctaxconsultant/',
+    tags: ['Professional', 'Consulting', 'Trust-focused'],
     icon: <LayoutGrid size={28} />,
   },
   {
-    title: 'Real Estate Lead Generator',
-    category: 'Web Development',
+    title: 'WEB FINDER',
+    category: 'Search Tool',
     description:
-      'Lead-focused pages with clean filters, clear CTAs, and a premium look that builds trust.',
-    image: 'https://picsum.photos/seed/web-6/1200/800',
-    url: 'https://example.com',
-    tags: ['Lead gen', 'Trust design', 'CTA-first'],
-    icon: <Rocket size={28} />,
-  },
-  {
-    title: 'E-commerce Product Pages',
-    category: 'Web Development',
-    description:
-      'Conversion-ready product sections with consistent layout, readable typography, and smooth interaction.',
-    image: 'https://picsum.photos/seed/web-7/1200/800',
-    url: 'https://example.com',
-    tags: ['Product UX', 'Consistency', 'Responsive'],
+      'A simple web search tool that helps users quickly find and navigate useful websites with a clean interface.',
+    image: 'https://picsum.photos/seed/search/1200/800',
+    url: 'https://github.com/sachinv1604/WEB_FINDER',
+    tags: ['Search Tool', 'Clean UI', 'Navigation'],
     icon: <Code size={28} />,
   },
   {
-    title: 'Portfolio for Creative Agency',
-    category: 'Web Development',
+    title: 'GOLDSMITH WEB',
+    category: 'Premium Business',
     description:
-      'A sleek portfolio experience with strong visual rhythm, sections that feel intentional, and great browsing.',
-    image: 'https://picsum.photos/seed/web-8/1200/800',
-    url: 'https://example.com',
-    tags: ['Creative layout', 'Smooth scroll', 'Modern UI'],
+      'A premium business website designed for showcasing jewelry products with elegant UI and smooth user experience.',
+    image: 'https://picsum.photos/seed/jewelry/1200/800',
+    url: 'https://github.com/sachinv1604/GOLDSMITH_WEB',
+    tags: ['Elegant UI', 'Jewelry Showcase', 'Premium'],
     icon: <Globe size={28} />,
   },
   {
-    title: 'Service Website With SEO Setup',
-    category: 'Web Development',
+    title: 'EDUTRANS WEB',
+    category: 'Student Transport',
     description:
-      'SEO-ready structure with clean content blocks, internal linking areas, and a conversion-first layout.',
-    image: 'https://picsum.photos/seed/web-9/1200/800',
-    url: 'https://example.com',
-    tags: ['SEO-ready', 'Structured content', 'Conversion'],
-    icon: <LayoutGrid size={28} />,
+      'A service-based website for student transport solutions, focusing on accessibility, clarity, and responsive design.',
+    image: 'https://picsum.photos/seed/transport/1200/800',
+    url: 'https://github.com/sachinv1604/edutrans_web',
+    tags: ['Accessibility', 'Transport Solutions', 'Responsive'],
+    icon: <Rocket size={28} />,
   },
 ];
 
@@ -261,7 +231,7 @@ export default function WebDevelopment() {
             </div>
 
             <p className="text-center text-slate-400 text-sm mt-10 hidden sm:block">
-              Replace the placeholder links later.
+              Some of the projects i worked on.
             </p>
           </div>
         </div>
