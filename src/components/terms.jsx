@@ -3,52 +3,68 @@ import { ArrowLeft } from 'lucide-react';
 
 export default function Terms({ onBack }) {
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-300 py-24 px-6">
+    <div className="min-h-screen bg-[#FAF7F2] text-[#453F36] py-20 px-6">
       <div className="container mx-auto max-w-4xl">
-        <button 
+        <button
           onClick={onBack}
-          className="flex items-center gap-2 text-indigo-400 hover:text-indigo-300 transition-colors mb-12 group"
+          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#EFE8DA] hover:bg-[#E2D8C7] text-[#191816] text-xs font-semibold transition-all mb-10 group"
         >
-          <ArrowLeft size={20} className="group-hover:-translate-x-1 transition-transform" />
-          Back to Home
+          <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
+          <span>Back to Home</span>
         </button>
-        
+
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="prose prose-invert max-w-none"
+          className="bg-white border border-[#DDD3BF] rounded-3xl p-8 md:p-12 shadow-sm"
         >
-          <h1 className="text-4xl font-bold text-white mb-8">Terms & Conditions</h1>
-          <p className="mb-6">Last updated: {new Date().toLocaleDateString()}</p>
-          
-          <section className="mb-10">
-            <h2 className="text-2xl font-bold text-white mb-4">1. Service Agreement</h2>
-            <p>By using our services, you agree to provide accurate information and cooperate during the design and development process.</p>
+          <h1 className="text-3xl md:text-5xl font-extrabold text-[#191816] mb-3 tracking-tight">
+            Terms & Conditions
+          </h1>
+          <p className="text-xs text-[#7A7367] mb-8">
+            Last updated: {new Date().toLocaleDateString()}
+          </p>
+
+          <section className="mb-8">
+            <h2 className="text-xl font-bold text-[#191816] mb-3">1. Service Agreement</h2>
+            <p className="text-sm leading-relaxed text-[#5A5245]">
+              By engaging <span className="font-semibold text-[#191816]">IedoFreelance</span> for services, you agree to provide accurate information and collaborate constructively during the design and development cycle.
+            </p>
           </section>
 
-          <section className="mb-10">
-            <h2 className="text-2xl font-bold text-white mb-4">2. Payments</h2>
-            <p>Project pricing is as listed in our "Pricing" section or as agreed upon via formal inquiry. A deposit may be required before starting any work.</p>
+          <section className="mb-8">
+            <h2 className="text-xl font-bold text-[#191816] mb-3">2. Payments</h2>
+            <p className="text-sm leading-relaxed text-[#5A5245]">
+              Project pricing is as listed in our Pricing section or as mutually agreed via formal quote. Advance payment or deposit may be required prior to initiating work.
+            </p>
           </section>
 
-          <section className="mb-10">
-            <h2 className="text-2xl font-bold text-white mb-4">3. Revisions</h2>
-            <p>Each package includes a specific number of revisions. Additional revisions may incur extra costs.</p>
+          <section className="mb-8">
+            <h2 className="text-xl font-bold text-[#191816] mb-3">3. Revisions</h2>
+            <p className="text-sm leading-relaxed text-[#5A5245]">
+              Each package includes a defined quota of revisions. Scope expansions or extra revision rounds beyond the agreed plan may incur additional fees.
+            </p>
           </section>
 
-          <section className="mb-10">
-            <h2 className="text-2xl font-bold text-white mb-4">4. Intellectual Property</h2>
-            <p>Upon final payment, the rights to the designs or code created for you will be transferred to you, though we reserve the right to showcase the work in our portfolio.</p>
+          <section className="mb-8">
+            <h2 className="text-xl font-bold text-[#191816] mb-3">4. Intellectual Property</h2>
+            <p className="text-sm leading-relaxed text-[#5A5245]">
+              Upon final settlement of invoices, ownership rights to finalized graphic files and deployed website code are transferred to the client. IedoFreelance reserves the right to display the completed work in portfolio showcases.
+            </p>
           </section>
 
-          <section className="mb-10">
-            <h2 className="text-2xl font-bold text-white mb-4">5. Limitation of Liability</h2>
-            <p>Idofreelance will not be liable for any indirect or consequential losses arising from the use of our services or website.</p>
+          <section className="mb-8">
+            <h2 className="text-xl font-bold text-[#191816] mb-3">5. Limitation of Liability</h2>
+            <p className="text-sm leading-relaxed text-[#5A5245]">
+              IedoFreelance will not be liable for any indirect or consequential damages or losses arising from third-party platform changes, hosting outages, or service usage.
+            </p>
           </section>
 
-          <section className="mb-10">
-            <h2 className="text-2xl font-bold text-white mb-4">6. Governing Law</h2>
-            <p>These terms are governed by the laws of Karnataka, India.</p>
+          <section>
+            <h2 className="text-xl font-bold text-[#191816] mb-3">6. Governing Law</h2>
+            <p className="text-sm leading-relaxed text-[#5A5245]">
+              These terms are governed by and construed in accordance with the laws of Karnataka, India.
+            </p>
           </section>
         </motion.div>
       </div>

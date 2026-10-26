@@ -1,12 +1,12 @@
 import { useMemo, useRef, useState } from 'react';
-import { motion, useScroll, useTransform, useMotionValueEvent } from 'framer-motion';
+import { motion, useScroll, useMotionValueEvent } from 'framer-motion';
 import { ChevronLeft, ChevronRight, Sparkles } from 'lucide-react';
 
 // Use Vite's glob import to get all the graphic design images at once
 const images = import.meta.glob('../assets/poster-*.jpeg', { eager: true, import: 'default' });
 // Sort filenames naturally to maintain consistency
 const sortedPaths = Object.keys(images).sort((a, b) => a.localeCompare(b, undefined, { numeric: true }));
-const photoUrls = sortedPaths.map(path => images[path]);
+const photoUrls = sortedPaths.map((path) => images[path]);
 
 const photos = photoUrls.map((src, i) => {
   const n = i + 1;
@@ -24,111 +24,109 @@ export default function GraphicDesigning() {
   // Optimized scroll logic using framer-motion's useScroll
   const { scrollYProgress } = useScroll({
     target: scrollAreaRef,
-    offset: ["start start", "end end"]
+    offset: ['start start', 'end end'],
   });
 
-  useMotionValueEvent(scrollYProgress, "change", (latest) => {
+  useMotionValueEvent(scrollYProgress, 'change', (latest) => {
     const el = scrollerRef.current;
     if (!el) return;
     const max = el.scrollWidth - el.clientWidth;
-    el.scrollLeft = max <= 0 ? 0 : latest * max;
+    // Normalized so posters finish scrolling at 85% of section height.
+    // The remaining 15% gives a generous buffer so the final poster is 100% full before unpinning!
+    const normalized = Math.min(1, Math.max(0, latest / 0.85));
+    el.scrollLeft = max <= 0 ? 0 : normalized * max;
     setProgress(latest);
   });
 
   const scrollByCards = (direction) => {
     const el = scrollerRef.current;
     if (!el) return;
-    el.scrollBy({ left: direction * 720, behavior: 'smooth' });
+    el.scrollBy({ left: direction * 500, behavior: 'smooth' });
   };
 
-  const scrollHeightVh = useMemo(() => 180 + photos.length * 6, []);
+  // Generous vertical scroll track so each poster is easily viewed
+  const scrollHeightVh = useMemo(() => 220 + photos.length * 8, []);
 
   return (
-    <section
-      id="graphic-designing"
-      className="py-24 bg-slate-950 border-t border-slate-800"
-    >
-      {/* Sticky horizontal gallery driven by vertical scroll (prevents moving to next section early) */}
+    <section id="graphic-designing" className="relative bg-[#FAF7F2] border-t border-[#EAE2D2]">
+      {/* Sticky horizontal gallery driven by vertical scroll */}
       <div ref={scrollAreaRef} className="relative" style={{ minHeight: `${scrollHeightVh}vh` }}>
-        <div className="sticky top-12 pt-12">
-          <div className="container mx-auto px-6 pb-20">
-            <div className="text-center mb-12">
-              <motion.h2
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                className="text-4xl md:text-5xl font-bold mb-4"
-              >
-                Graphic <span className="text-indigo-500">Designing</span> Gallery
-              </motion.h2>
-              <p className="text-slate-400 max-w-2xl mx-auto">
-                Here are a few graphic designs I’ve done for past clients. Take a look!
+        {/* Pinned full-viewport container centered vertically so posters are NEVER cut off */}
+        <div className="sticky top-0 h-screen w-full flex flex-col justify-center overflow-hidden pt-16 md:pt-14 pb-8">
+          <div className="container mx-auto px-4 sm:px-6 flex flex-col justify-center h-full max-h-[92vh]">
+            {/* Compact, elegant header that leaves plenty of room for posters */}
+            <div className="text-center mb-3 sm:mb-4 shrink-0">
+              <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-[#EFE8DA] text-[11px] font-semibold text-[#5A5245] mb-2">
+                <Sparkles className="text-[#4E6047]" size={12} />
+                <span>Selected Graphic Works ({photos.length} Designs)</span>
+              </div>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#191816] tracking-tight">
+                Visual Identity & Poster Showcase
+              </h2>
+              <p className="text-xs sm:text-sm text-[#6C665D] mt-1 max-w-xl mx-auto">
+                Scroll down to browse through all campaign posters and branding designs
               </p>
             </div>
 
-            <div className="relative">
-              <div className="absolute -top-3 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2 px-4 py-2 rounded-full bg-slate-900/70 border border-slate-800 shadow-lg">
-                <Sparkles className="text-indigo-400" size={16} />
-                <span className="text-xs font-bold text-slate-200">keep scrolling...</span>
-              </div>
-
+            {/* Gallery Track Container */}
+            <div className="relative max-w-6xl mx-auto w-full shrink-0">
+              {/* Left / Right manual arrows */}
               <button
                 type="button"
                 onClick={() => scrollByCards(-1)}
-                className="hidden md:flex absolute -left-3 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full items-center justify-center bg-slate-900/80 border border-slate-800 hover:border-indigo-500/60 hover:text-white text-slate-300 transition-all shadow-lg"
+                className="hidden md:flex absolute -left-4 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full items-center justify-center bg-[#FAF7F2] border border-[#DDD3BF] hover:bg-[#191816] hover:text-[#FAF7F2] text-[#191816] transition-all shadow-md cursor-pointer"
                 aria-label="Scroll left"
               >
-                <ChevronLeft size={18} />
+                <ChevronLeft size={20} />
               </button>
 
               <button
                 type="button"
                 onClick={() => scrollByCards(1)}
-                className="hidden md:flex absolute -right-3 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full items-center justify-center bg-slate-900/80 border border-slate-800 hover:border-indigo-500/60 hover:text-white text-slate-300 transition-all shadow-lg"
+                className="hidden md:flex absolute -right-4 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full items-center justify-center bg-[#FAF7F2] border border-[#DDD3BF] hover:bg-[#191816] hover:text-[#FAF7F2] text-[#191816] transition-all shadow-md cursor-pointer"
                 aria-label="Scroll right"
               >
-                <ChevronRight size={18} />
+                <ChevronRight size={20} />
               </button>
 
+              {/* Poster scroller: constrained height so posters are 100% visible vertically */}
               <div
                 ref={scrollerRef}
-                className="trendy-scrollbar overflow-x-auto flex gap-6 pb-10"
+                className="trendy-scrollbar overflow-x-auto flex gap-5 sm:gap-6 pb-6 pt-2 px-2 pl-4 pr-[35vw] md:pr-[45vw]"
                 style={{ scrollBehavior: 'auto' }}
               >
-                {photos.map((photo, index) => (
-                  <motion.div
+                {photos.map((photo) => (
+                  <div
                     key={photo.id}
-                    initial={{ opacity: 0, y: 18 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: index * 0.04 }}
-                    className="flex-none w-[280px] sm:w-[340px] md:w-[420px] bg-slate-900 overflow-hidden"
+                    className="h-[46vh] sm:h-[50vh] md:h-[54vh] max-h-[440px] min-h-[250px] aspect-square flex-none rounded-2xl md:rounded-3xl overflow-hidden border border-[#E5DEC9] bg-[#EFE8DA] shadow-md transition-transform hover:scale-[1.02] duration-200"
                   >
                     <img
                       src={photo.src}
-                      alt={`Poster ${photo.id}`}
+                      alt={`Poster design ${photo.id}`}
                       loading="lazy"
-                      className="w-full h-auto block"
+                      className="w-full h-full object-cover block"
                     />
-                  </motion.div>
+                  </div>
                 ))}
               </div>
 
-              <div className="absolute left-0 right-0 bottom-0 px-4 md:px-0">
-                <div className="h-2.5 bg-slate-900/60 border border-slate-800 rounded-full overflow-hidden">
+              {/* Progress bar */}
+              <div className="w-full max-w-md mx-auto px-4 mt-2">
+                <div className="h-1.5 bg-[#EAE2D2] border border-[#DDD3BF] rounded-full overflow-hidden">
                   <div
-                    className="h-full bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full"
+                    className="h-full bg-[#191816] rounded-full transition-all duration-100"
                     style={{ width: `${progress * 100}%` }}
                   />
                 </div>
+                <div className="flex justify-between items-center text-[11px] text-[#7A7367] mt-1.5">
+                  <span>Scroll down to navigate</span>
+                  <span>{Math.round(progress * 100)}%</span>
+                </div>
               </div>
             </div>
-
-
           </div>
         </div>
       </div>
     </section>
   );
 }
-

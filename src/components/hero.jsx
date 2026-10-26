@@ -1,105 +1,84 @@
 import { motion } from 'framer-motion';
-import { CheckCircle2, Zap, ShieldCheck } from 'lucide-react';
-import heroImage from '../assets/mee.png';
+import { ArrowRight } from 'lucide-react';
 
 export default function Hero() {
-    return (
-        <section id="home" className="relative min-h-screen flex items-center pt-20 overflow-hidden">
-            {/* Background Blobs */}
-            <div className="absolute top-1/4 -left-20 w-72 h-72 bg-indigo-600/20 rounded-full blur-[120px] animate-pulse"></div>
-            <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-purple-600/20 rounded-full blur-[120px] animate-pulse delay-700"></div>
+  return (
+    <section id="home" className="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden bg-[#FAF7F2]">
+      {/* Subtle warm ambient background glow */}
+      <div className="absolute top-16 left-1/2 -translate-x-1/2 w-[720px] h-[360px] bg-gradient-to-b from-[#EFE5D3]/60 via-[#F3ECE1]/30 to-transparent blur-3xl pointer-events-none rounded-full" />
 
-            <div className="container mx-auto px-6 relative z-10">
-                <div className="flex flex-col lg:flex-row items-center gap-12">
-                    <div className="flex-1">
-                        <motion.div
-                            initial={{ opacity: 0, y: 30 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.8 }}
-                        >
-                            <h1 className="text-5xl md:text-7xl font-extrabold leading-tight mb-6 text-white relative">
-                                {"Helping Local Businesses Grow Online".split(" ").map((word, i) => (
-                                    <span key={i} className="relative inline-block mr-[0.25em] last:mr-0 mt-2">
-                                        {word === "Local" || word === "Businesses" ? (
-                                            <span className="bg-gradient-to-r from-indigo-400 to-purple-500 bg-clip-text text-transparent">
-                                                {word}
-                                            </span>
-                                        ) : word}
+      <div className="container mx-auto px-6 relative z-10">
+        {/* Centered Editorial Header */}
+        <div className="text-center max-w-4xl mx-auto mb-10 md:mb-14">
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#EFE8DA] border border-[#E0D5C1] text-xs font-semibold tracking-wide text-[#453F36] mb-6"
+          >
+            <span className="w-2 h-2 rounded-full bg-[#4E6047]" />
+            <span>Available for Freelance & Local Business Growth</span>
+          </motion.div>
 
-                                        {/* Sequential Radiative Line - Mobile Only */}
-                                        <motion.div
-                                            className="absolute top-1/2 -translate-y-1/2 h-[2px] w-4 md:hidden z-20"
-                                            style={{
-                                                background: 'linear-gradient(90deg, transparent, #fff, transparent)',
-                                                boxShadow: '0 0 15px 2px rgba(99, 102, 241, 0.8)',
-                                                left: 0
-                                            }}
-                                            initial={{ x: '-100%', opacity: 0 }}
-                                            animate={{
-                                                x: ['-100%', '200%'],
-                                                opacity: [0, 1, 1, 0]
-                                            }}
-                                            transition={{
-                                                duration: 0.8,
-                                                delay: i * 0.5,
-                                                repeat: Infinity,
-                                                repeatDelay: ("Helping Local Businesses Grow Online".split(" ").length * 0.5) + 2,
-                                                ease: "linear"
-                                            }}
-                                        />
-                                    </span>
-                                ))}
-                            </h1>
-                            <p className="text-lg md:text-xl text-slate-400 mb-10 max-w-2xl leading-relaxed">
-                                Elevate your brand with premium graphic design, social media management, and custom landing pages tailored for local growth. Let's turn your vision into digital reality.
-                            </p>
-                            <div className="flex flex-col sm:flex-row gap-4">
-                                <motion.a
-                                    href="#graphic-designing"
-                                    whileHover={{ scale: 1.05 }}
-                                    whileTap={{ scale: 0.95 }}
-                                    className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-8 py-4 rounded-full font-bold text-center shadow-lg hover:shadow-indigo-500/30 transition-shadow"
-                                >
-                                    View My Work
-                                </motion.a>
-                                <motion.a
-                                    href={`https://wa.me/918762457716?text=${encodeURIComponent("Hi Sachin, I'm interested in hiring you for a project. Let's discuss!")}`}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    whileHover={{ scale: 1.05 }}
-                                    whileTap={{ scale: 0.95 }}
-                                    className="bg-slate-900 border border-slate-700 text-white px-8 py-4 rounded-full font-bold text-center hover:bg-slate-800 transition-colors"
-                                >
-                                    Hire Me
-                                </motion.a>
-                            </div>
+          <motion.h1
+            initial={{ opacity: 0, y: 25 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7 }}
+            className="tracking-tight"
+          >
+            <span className="font-editorial italic text-4xl sm:text-6xl md:text-7xl font-normal text-[#191816] block leading-[1.1]">
+              Elevate Your Brand,
+            </span>
+            <span className="font-sans font-extrabold text-3xl sm:text-5xl md:text-6xl text-[#191816] block mt-1 tracking-tight leading-[1.15]">
+              Supercharge Your Digital Growth
+            </span>
+          </motion.h1>
 
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.15 }}
+            className="text-base sm:text-lg md:text-xl text-[#6C665D] mt-6 max-w-2xl mx-auto leading-relaxed"
+          >
+            All-in-one digital partner for graphic design, modern high-converting websites,
+            and social media management — built to help local businesses thrive.
+          </motion.p>
 
-                        </motion.div>
-                    </div>
+          {/* Action Buttons */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.25 }}
+            className="flex flex-wrap items-center justify-center gap-3.5 mt-8"
+          >
+            <motion.a
+              href="#graphic-designing"
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.97 }}
+              className="px-7 py-3 rounded-full bg-[#191816] hover:bg-[#2C2925] text-[#FAF7F2] font-semibold text-sm inline-flex items-center gap-2.5 shadow-md shadow-[#191816]/10 transition-all"
+            >
+              <span>View My Work</span>
+              <span className="w-5 h-5 rounded-full bg-white/20 flex items-center justify-center text-xs">
+                →
+              </span>
+            </motion.a>
 
-                    <div className="flex-1 relative hidden lg:block">
-                        <motion.div
-                            initial={{ opacity: 0, scale: 0.8 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            transition={{ delay: 0.2, duration: 1 }}
-                            className="relative z-20"
-                        >
-                            <div className="relative w-full max-w-[500px] aspect-square mx-auto">
-                                {/* Decorative Elements */}
-                                <div className="absolute inset-0 bg-gradient-to-tr from-indigo-500 to-purple-500 rounded-full blur-3xl opacity-20 animate-pulse"></div>
-                                <div className="absolute -inset-4 border border-slate-800 rounded-full animate-spin-slow"></div>
-
-                                <img
-                                    src={heroImage}
-                                    alt="Sachin AJ"
-                                    className="relative z-10 w-full h-full object-contain drop-shadow-2xl"
-                                />
-                            </div>
-                        </motion.div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    );
+            <motion.a
+              href={`https://wa.me/918762457716?text=${encodeURIComponent(
+                "Hi Sachin, I'd like to talk about a project for my business."
+              )}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.97 }}
+              className="px-7 py-3 rounded-full bg-[#ECE5D8] hover:bg-[#E2D9C9] text-[#191816] border border-[#DDD3C0] font-semibold text-sm inline-flex items-center gap-2 transition-all"
+            >
+              <span>Hire Me</span>
+              <ArrowRight size={15} />
+            </motion.a>
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  );
 }

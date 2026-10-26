@@ -22,7 +22,7 @@ function App() {
   }, [view]);
 
   return (
-    <div className="bg-slate-950 text-white selection:bg-purple-500/30">
+    <div className="min-h-screen bg-[#FAF7F2] text-[#191816] selection:bg-[#4E6047]/25 selection:text-[#191816]">
       {view === 'home' ? (
         <>
           <Navbar />
@@ -31,10 +31,7 @@ function App() {
             <Services />
             <GraphicDesigning />
             <WebDevelopment />
-
-
             <Pricing />
-
             <Contact />
           </main>
           <Footer setView={setView} />
