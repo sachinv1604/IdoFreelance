@@ -4,6 +4,15 @@ import { Code, Globe, LayoutGrid, Rocket, ExternalLink } from 'lucide-react';
 
 const websites = [
   {
+    title: 'RENUKA TRADERS',
+    category: 'Wholesale Garlic Trader',
+    description:
+      'A clean, professional website for wholesale garlic trading, connecting bulk agricultural buyers with trusted quality produce.',
+    url: 'https://renukatraders.com/',
+    tags: ['Wholesale Garlic', 'Agricultural Trading', 'B2B Business'],
+    icon: <Globe size={24} />,
+  },
+  {
     title: 'LIC OBCEWA WEBSITE',
     category: 'Insurance Service',
     description:
