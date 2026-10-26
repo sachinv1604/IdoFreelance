@@ -38,64 +38,47 @@ export default function Hero() {
     container.addEventListener('mousemove', handleMouseMove);
     container.addEventListener('mouseleave', handleMouseLeave);
 
-    // Generate diverse snowflakes and light falling drops
-    const PARTICLE_COUNT = 65;
+    // Generate only snowflakes (no dots, no lines)
+    const PARTICLE_COUNT = 55;
     const particles = Array.from({ length: PARTICLE_COUNT }, () => ({
       x: Math.random() * width,
       y: Math.random() * height,
-      radius: Math.random() * 3 + 1.2,
-      speedY: Math.random() * 1.2 + 0.6,
-      speedX: Math.random() * 0.5 - 0.25,
-      opacity: Math.random() * 0.65 + 0.35,
+      radius: Math.random() * 5 + 4, // 4px to 9px snowflake size
+      speedY: Math.random() * 0.9 + 0.5,
+      speedX: Math.random() * 0.4 - 0.2,
+      opacity: Math.random() * 0.6 + 0.35,
       swing: Math.random() * Math.PI * 2,
-      swingSpeed: Math.random() * 0.02 + 0.01,
-      drift: Math.random() * 1.2 + 0.4,
+      swingSpeed: Math.random() * 0.02 + 0.008,
+      drift: Math.random() * 1.0 + 0.4,
       rotation: Math.random() * Math.PI * 2,
       rotationSpeed: (Math.random() - 0.5) * 0.02,
-      // 0 = soft glowing snow flake, 1 = intricate snow crystal, 2 = rain drop streak
-      type: Math.random() < 0.25 ? 1 : Math.random() < 0.75 ? 0 : 2,
     }));
 
-    function drawCrystal(context, x, y, r, opacity, rotation) {
+    function drawSnowflake(context, x, y, r, opacity, rotation) {
       context.save();
       context.translate(x, y);
       context.rotate(rotation);
       context.strokeStyle = `rgba(255, 255, 255, ${opacity})`;
-      context.shadowColor = 'rgba(180, 150, 110, 0.45)';
-      context.shadowBlur = 5;
-      context.lineWidth = 1.2;
+      context.shadowColor = 'rgba(175, 145, 110, 0.4)';
+      context.shadowBlur = 4;
+      context.lineWidth = Math.max(1, r * 0.18);
       context.beginPath();
       for (let i = 0; i < 6; i++) {
         context.rotate(Math.PI / 3);
         context.moveTo(0, 0);
-        context.lineTo(0, r * 1.8);
-        context.moveTo(0, r * 1.0);
-        context.lineTo(-r * 0.5, r * 1.4);
-        context.moveTo(0, r * 1.0);
-        context.lineTo(r * 0.5, r * 1.4);
+        context.lineTo(0, r);
+        // Snowflake crystal branches
+        context.moveTo(0, r * 0.65);
+        context.lineTo(-r * 0.35, r * 0.95);
+        context.moveTo(0, r * 0.65);
+        context.lineTo(r * 0.35, r * 0.95);
+        if (r > 6) {
+          context.moveTo(0, r * 0.35);
+          context.lineTo(-r * 0.2, r * 0.55);
+          context.moveTo(0, r * 0.35);
+          context.lineTo(r * 0.2, r * 0.55);
+        }
       }
-      context.stroke();
-      context.restore();
-    }
-
-    function drawFlake(context, x, y, r, opacity) {
-      context.save();
-      context.beginPath();
-      context.arc(x, y, r, 0, Math.PI * 2);
-      context.fillStyle = `rgba(255, 255, 255, ${opacity})`;
-      context.shadowColor = 'rgba(180, 150, 110, 0.4)';
-      context.shadowBlur = 6;
-      context.fill();
-      context.restore();
-    }
-
-    function drawDrop(context, x, y, length, opacity) {
-      context.save();
-      context.beginPath();
-      context.moveTo(x, y);
-      context.lineTo(x + 0.6, y + length);
-      context.strokeStyle = `rgba(160, 140, 115, ${opacity * 0.45})`;
-      context.lineWidth = 1.2;
       context.stroke();
       context.restore();
     }
@@ -108,38 +91,32 @@ export default function Hero() {
       for (let i = 0; i < particles.length; i++) {
         const p = particles[i];
 
-        // Update oscillation
+        // Update gentle swaying and rotation
         p.swing += p.swingSpeed;
         p.rotation += p.rotationSpeed;
         p.y += p.speedY;
         p.x += Math.sin(p.swing) * p.drift + p.speedX;
 
-        // Mouse push interaction
+        // Mouse gentle push interaction
         const dx = p.x - mouse.x;
         const dy = p.y - mouse.y;
         const dist = Math.sqrt(dx * dx + dy * dy);
         if (dist < mouse.radius) {
           const force = (mouse.radius - dist) / mouse.radius;
-          p.x += (dx / dist) * force * 3;
-          p.y += (dy / dist) * force * 3;
+          p.x += (dx / dist) * force * 2.5;
+          p.y += (dy / dist) * force * 2.5;
         }
 
         // Wrap around borders
-        if (p.y > height + 10) {
-          p.y = -10;
+        if (p.y > height + 15) {
+          p.y = -15;
           p.x = Math.random() * width;
         }
-        if (p.x < -10) p.x = width + 10;
-        if (p.x > width + 10) p.x = -10;
+        if (p.x < -15) p.x = width + 15;
+        if (p.x > width + 15) p.x = -15;
 
-        // Draw particle based on type
-        if (p.type === 1) {
-          drawCrystal(ctx, p.x, p.y, p.radius * 2.2, p.opacity, p.rotation);
-        } else if (p.type === 0) {
-          drawFlake(ctx, p.x, p.y, p.radius, p.opacity);
-        } else {
-          drawDrop(ctx, p.x, p.y, p.radius * 4, p.opacity);
-        }
+        // Draw only snowflake crystals
+        drawSnowflake(ctx, p.x, p.y, p.radius, p.opacity, p.rotation);
       }
 
       animationFrameId = requestAnimationFrame(render);
