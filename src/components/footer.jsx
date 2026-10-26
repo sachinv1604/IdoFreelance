@@ -61,16 +61,8 @@ export default function Footer({ setView }) {
                   Landing Page Development
                 </a>
               </li>
-              <li>
-                <a href="#services" className="text-[#9E978C] hover:text-[#FAF7F2] transition-colors">
-                  Social Media Strategy
-                </a>
-              </li>
-              <li>
-                <a href="#services" className="text-[#9E978C] hover:text-[#FAF7F2] transition-colors">
-                  Google My Business Setup
-                </a>
-              </li>
+
+
             </ul>
           </div>
 
