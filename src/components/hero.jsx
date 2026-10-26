@@ -38,60 +38,77 @@ export default function Hero() {
     container.addEventListener('mousemove', handleMouseMove);
     container.addEventListener('mouseleave', handleMouseLeave);
 
-    // Generate exclusively snowflakes (no dots, no line streaks)
-    const PARTICLE_COUNT = 50;
+    // Generate diverse snowflakes and light falling drops
+    const PARTICLE_COUNT = 65;
     const particles = Array.from({ length: PARTICLE_COUNT }, () => ({
       x: Math.random() * width,
       y: Math.random() * height,
-      size: Math.random() * 6 + 4, // snowflake radius from 4px to 10px
-      speedY: Math.random() * 0.9 + 0.4,
-      speedX: Math.random() * 0.4 - 0.2,
-      opacity: Math.random() * 0.55 + 0.45,
+      radius: Math.random() * 3 + 1.2,
+      speedY: Math.random() * 1.2 + 0.6,
+      speedX: Math.random() * 0.5 - 0.25,
+      opacity: Math.random() * 0.65 + 0.35,
       swing: Math.random() * Math.PI * 2,
-      swingSpeed: Math.random() * 0.015 + 0.008,
-      drift: Math.random() * 1.0 + 0.3,
+      swingSpeed: Math.random() * 0.02 + 0.01,
+      drift: Math.random() * 1.2 + 0.4,
       rotation: Math.random() * Math.PI * 2,
       rotationSpeed: (Math.random() - 0.5) * 0.02,
+      // 0 = soft glowing snow flake, 1 = intricate snow crystal, 2 = rain drop streak
+      type: Math.random() < 0.25 ? 1 : Math.random() < 0.75 ? 0 : 2,
     }));
 
-    function drawSnowflake(context, x, y, r, opacity, rotation) {
+    function drawCrystal(context, x, y, r, opacity, rotation) {
       context.save();
       context.translate(x, y);
       context.rotate(rotation);
       context.strokeStyle = `rgba(255, 255, 255, ${opacity})`;
       context.shadowColor = 'rgba(180, 150, 110, 0.45)';
-      context.shadowBlur = 4;
-      context.lineWidth = Math.max(1, r * 0.2);
-      context.lineCap = 'round';
+      context.shadowBlur = 5;
+      context.lineWidth = 1.2;
       context.beginPath();
       for (let i = 0; i < 6; i++) {
         context.rotate(Math.PI / 3);
         context.moveTo(0, 0);
-        context.lineTo(0, r);
-        // Outer V branch
-        context.moveTo(0, r * 0.65);
-        context.lineTo(-r * 0.35, r * 0.95);
-        context.moveTo(0, r * 0.65);
-        context.lineTo(r * 0.35, r * 0.95);
-        // Inner small V branch on larger flakes
-        if (r > 6) {
-          context.moveTo(0, r * 0.35);
-          context.lineTo(-r * 0.2, r * 0.52);
-          context.moveTo(0, r * 0.35);
-          context.lineTo(r * 0.2, r * 0.52);
-        }
+        context.lineTo(0, r * 1.8);
+        context.moveTo(0, r * 1.0);
+        context.lineTo(-r * 0.5, r * 1.4);
+        context.moveTo(0, r * 1.0);
+        context.lineTo(r * 0.5, r * 1.4);
       }
       context.stroke();
       context.restore();
     }
 
+    function drawFlake(context, x, y, r, opacity) {
+      context.save();
+      context.beginPath();
+      context.arc(x, y, r, 0, Math.PI * 2);
+      context.fillStyle = `rgba(255, 255, 255, ${opacity})`;
+      context.shadowColor = 'rgba(180, 150, 110, 0.4)';
+      context.shadowBlur = 6;
+      context.fill();
+      context.restore();
+    }
+
+    function drawDrop(context, x, y, length, opacity) {
+      context.save();
+      context.beginPath();
+      context.moveTo(x, y);
+      context.lineTo(x + 0.6, y + length);
+      context.strokeStyle = `rgba(160, 140, 115, ${opacity * 0.45})`;
+      context.lineWidth = 1.2;
+      context.stroke();
+      context.restore();
+    }
+
+    let frame = 0;
     const render = () => {
+      frame++;
       ctx.clearRect(0, 0, width, height);
 
       for (let i = 0; i < particles.length; i++) {
         const p = particles[i];
 
-        // Update oscillation and drift
+        // Update oscillation
         p.swing += p.swingSpeed;
         p.rotation += p.rotationSpeed;
         p.y += p.speedY;
@@ -108,15 +125,21 @@ export default function Hero() {
         }
 
         // Wrap around borders
-        if (p.y > height + 15) {
-          p.y = -15;
+        if (p.y > height + 10) {
+          p.y = -10;
           p.x = Math.random() * width;
         }
-        if (p.x < -15) p.x = width + 15;
-        if (p.x > width + 15) p.x = -15;
+        if (p.x < -10) p.x = width + 10;
+        if (p.x > width + 10) p.x = -10;
 
-        // Draw pure snowflake crystal only
-        drawSnowflake(ctx, p.x, p.y, p.size, p.opacity, p.rotation);
+        // Draw particle based on type
+        if (p.type === 1) {
+          drawCrystal(ctx, p.x, p.y, p.radius * 2.2, p.opacity, p.rotation);
+        } else if (p.type === 0) {
+          drawFlake(ctx, p.x, p.y, p.radius, p.opacity);
+        } else {
+          drawDrop(ctx, p.x, p.y, p.radius * 4, p.opacity);
+        }
       }
 
       animationFrameId = requestAnimationFrame(render);
@@ -225,7 +248,7 @@ export default function Hero() {
               <span className="w-5 h-5 rounded-full bg-[#EFE8DA] flex items-center justify-center text-[#4E6047]">
                 ✓
               </span>
-              <span>350+ Client Posters & Designs</span>
+              <span>150+ Client Posters & Designs</span>
             </div>
             <div className="flex items-center gap-2 font-medium">
               <span className="w-5 h-5 rounded-full bg-[#EFE8DA] flex items-center justify-center text-[#4E6047]">
