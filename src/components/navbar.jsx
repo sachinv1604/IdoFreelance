@@ -24,7 +24,7 @@ export default function Navbar() {
 
   return (
     <>
-      {/* Floating White Navigation Bar - rounded-full directly on nav to eliminate any square corner shadow artifacts */}
+      {/* Floating White Navigation Bar */}
       <nav
         className={`fixed top-3.5 sm:top-5 left-1/2 -translate-x-1/2 z-50 w-[94%] max-w-5xl bg-white rounded-full border border-stone-200/90 px-4 sm:px-6 py-2.5 sm:py-3 flex justify-between items-center transition-all duration-300 ${
           scrolled ? 'shadow-lg shadow-black/8' : 'shadow-md shadow-black/5'
@@ -91,22 +91,28 @@ export default function Navbar() {
         </div>
       </nav>
 
-      {/* Mobile Menu Dropdown */}
+      {/* Mobile Menu Dropdown & Full Backdrop */}
       <AnimatePresence>
         {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -8, scale: 0.98 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: -8, scale: 0.98 }}
-            transition={{ duration: 0.2, ease: 'easeOut' }}
-            className="md:hidden fixed top-20 sm:top-22 left-1/2 -translate-x-1/2 w-[94%] max-w-md z-50"
-          >
-            <div
-              className="fixed inset-0 bg-[#191816]/30 backdrop-blur-xs -z-10"
+          <div className="md:hidden fixed inset-0 z-50 pointer-events-auto">
+            {/* Full Screen Screen Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="fixed inset-0 bg-black/30 backdrop-blur-xs"
               onClick={() => setIsOpen(false)}
             />
 
-            <div className="rounded-3xl border border-stone-200 bg-white shadow-2xl p-5 overflow-hidden">
+            {/* Floating Clean White Menu Card */}
+            <motion.div
+              initial={{ opacity: 0, y: -12, scale: 0.96 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: -12, scale: 0.96 }}
+              transition={{ duration: 0.2, ease: 'easeOut' }}
+              className="relative mx-auto mt-20 sm:mt-24 w-[92%] max-w-sm rounded-3xl border border-stone-200/90 bg-white shadow-2xl p-5 overflow-hidden z-10"
+            >
               <div className="flex items-center justify-between mb-4 pb-3 border-b border-stone-100">
                 <div className="flex items-center gap-2">
                   <img
@@ -173,8 +179,8 @@ export default function Navbar() {
                   <span className="text-xs text-white/80">Let&apos;s talk →</span>
                 </a>
               </div>
-            </div>
-          </motion.div>
+            </motion.div>
+          </div>
         )}
       </AnimatePresence>
     </>
