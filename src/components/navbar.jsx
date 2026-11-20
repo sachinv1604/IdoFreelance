@@ -26,9 +26,8 @@ export default function Navbar() {
     <>
       {/* Floating White Navigation Bar */}
       <nav
-        className={`fixed top-3.5 sm:top-5 left-1/2 -translate-x-1/2 z-50 w-[94%] max-w-5xl bg-white rounded-full border border-stone-200/90 px-4 sm:px-6 py-2.5 sm:py-3 flex justify-between items-center transition-all duration-300 ${
-          scrolled ? 'shadow-lg shadow-black/8' : 'shadow-md shadow-black/5'
-        }`}
+        className={`fixed top-3.5 sm:top-5 left-1/2 -translate-x-1/2 z-50 w-[94%] max-w-5xl bg-white rounded-full border border-stone-200/90 px-4 sm:px-6 py-2.5 sm:py-3 flex justify-between items-center transition-all duration-300 ${scrolled ? 'shadow-lg shadow-black/8' : 'shadow-md shadow-black/5'
+          }`}
       >
         {/* Brand Logo & Name */}
         <motion.a
@@ -43,7 +42,7 @@ export default function Navbar() {
             className="h-8 sm:h-9 w-auto object-contain transition-transform duration-200 group-hover:scale-105"
           />
           <span className="text-base sm:text-lg font-semibold tracking-tight text-[#191816]">
-            IedoFreelance
+            IEDOfreelance
           </span>
         </motion.a>
 
